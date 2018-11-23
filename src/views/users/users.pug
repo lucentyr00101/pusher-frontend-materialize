@@ -34,3 +34,6 @@ div
                     v-icon(small) edit 
                 v-btn(color="red" icon @click="deleteUser(props.item.id)")
                     v-icon(small) delete
+    v-snackbar(v-model="snackbar.show" :color="snackbar.color" timeout="3000")
+        | {{ snackbar.text }}
+        v-btn(dark flat @click="snackbar.show = false") Close

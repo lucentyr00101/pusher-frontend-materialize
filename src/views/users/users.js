@@ -26,6 +26,11 @@ export default {
                 name: null,
                 email: null,
                 password: null,
+            },
+            snackbar: {
+                show: false,
+                text: null,
+                color: 'success'
             }
         }
     },
@@ -46,6 +51,8 @@ export default {
                 .then(() => {
                     this.resetFields()
                     this.dialog = false
+                    this.snackbar.show = true
+                    this.snackbar.text = 'User saved succesfully.'
                 })
                 .catch(e => console.log(e))
         },
@@ -57,9 +64,15 @@ export default {
             }
         },
         deleteUser(id) {
-            axios.delete(deleteUser(id))
-                .then(() => this.setUsers())
-                .catch(e => console.log(e))
+            if(confirm('Are you sure you want to delete?')) {
+                axios.delete(deleteUser(id))
+                    .then(() => {
+                        this.setUsers()
+                        this.snackbar.show = true
+                        this.snackbar.text = 'User deleted succesfully.'
+                    })
+                    .catch(e => console.log(e))
+            }
         }
     },
     mounted() {
