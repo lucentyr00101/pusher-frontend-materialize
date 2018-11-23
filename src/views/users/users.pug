@@ -1,0 +1,36 @@
+div
+    v-toolbar(flat)
+        v-toolbar-title Users List
+        v-divider.mx-2(inset vertical)
+        v-spacer
+        v-dialog(v-model="dialog" max-width="500px")
+            v-btn.mb-2(slot="activator" color="primary" dark) New User
+            v-card
+                v-form(@submit.prevent="save")
+                    v-card-title
+                        span.headline New User
+                    v-card-text
+                        v-container(grid-list-md)
+                            v-layout(wrap)
+                                v-flex(xs12)
+                                    v-text-field(label="Name" v-model="newUser.name")
+                                v-flex(xs12)
+                                    v-text-field(label="Email" type="email" v-model="newUser.email")
+                                v-flex(xs12)
+                                    v-text-field(label="Password" type="password" v-model="newUser.password")
+                    v-card-actions
+                        v-spacer
+                        v-btn(color="blue darken-1" flat @click="dialog = false") Cancel
+                        v-btn(color="blue darken-1" flat type="submit") Save
+    v-data-table.elevation-1(:rows-per-page-items="rowsPerPageItems" :headers="headers" :items="users" v-if="users" disable-initial-sort)
+        template(slot="items" slot-scope="props")
+            td.text-xs-center {{ props.item.id }}
+            td.text-xs-center {{ props.item.name }}
+            td.text-xs-center {{ props.item.email }}
+            td.text-xs-center {{ props.item.created_at }}
+            td.text-xs-center {{ props.item.updated_at }}
+            td.text-xs-center
+                v-btn(color="info" icon)
+                    v-icon(small) edit 
+                v-btn(color="red" icon)
+                    v-icon(small) delete
