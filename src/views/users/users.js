@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { users, newUser } from '@/utils/api'
+import { users, newUser, deleteUser } from '@/utils/api'
 
 const Pusher = require('pusher-js');
 Pusher.logToConsole = true;
@@ -43,8 +43,7 @@ export default {
             formData.append('email', this.newUser.email)
             formData.append('password', this.newUser.password)
             axios.post(newUser(), formData)
-                .then(res => {
-                    console.log(res)
+                .then(() => {
                     this.resetFields()
                     this.dialog = false
                 })
@@ -56,6 +55,11 @@ export default {
                 email: null,
                 password: null
             }
+        },
+        deleteUser(id) {
+            axios.delete(deleteUser(id))
+                .then(() => this.setUsers())
+                .catch(e => console.log(e))
         }
     },
     mounted() {

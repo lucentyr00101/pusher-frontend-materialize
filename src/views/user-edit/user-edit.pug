@@ -1,0 +1,11 @@
+v-form(@submit.prevent="updateUser")
+    v-layout
+        v-flex(xs8 md6 mx-auto)
+            v-card
+                v-card-title(primary-title)
+                    h3 Edit User
+                v-card-text
+                    v-text-field(v-model="user.name" label="Name")
+                    v-text-field(v-model="user.email" label="Email" type="email")
+                v-card-actions
+                    v-btn(color="orange" type="submit") Update

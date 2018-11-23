@@ -20,6 +20,16 @@ export default new Router({
           path: '/',
           component: () => import('@/views/users'),
           name: 'users'
+        },
+        {
+          path: ':id',
+          component: () => import('@/views/user-show'),
+          name: 'user-show'
+        },
+        {
+          path: ':id/edit',
+          component: () => import('@/views/user-edit'),
+          name: 'user-edit'
         }
       ]
     }

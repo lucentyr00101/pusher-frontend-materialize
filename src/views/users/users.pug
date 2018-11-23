@@ -30,7 +30,7 @@ div
             td.text-xs-center {{ props.item.created_at }}
             td.text-xs-center {{ props.item.updated_at }}
             td.text-xs-center
-                v-btn(color="info" icon)
+                v-btn(color="info" icon :to="{ name: 'user-edit', params: { id: props.item.id} }")
                     v-icon(small) edit 
-                v-btn(color="red" icon)
+                v-btn(color="red" icon @click="deleteUser(props.item.id)")
                     v-icon(small) delete
