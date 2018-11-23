@@ -31,7 +31,10 @@ export default {
                 show: false,
                 text: null,
                 color: 'success'
-            }
+            },
+            rules: [
+                v => !!v || 'Field is required',
+            ]
         }
     },
     methods: {
@@ -43,18 +46,20 @@ export default {
                 .catch(e => console.log(e))
         },
         save() {
-            let formData = new FormData()
-            formData.append('name', this.newUser.name)
-            formData.append('email', this.newUser.email)
-            formData.append('password', this.newUser.password)
-            axios.post(newUser(), formData)
-                .then(() => {
-                    this.resetFields()
-                    this.dialog = false
-                    this.snackbar.show = true
-                    this.snackbar.text = 'User saved succesfully.'
-                })
-                .catch(e => console.log(e))
+            if(this.$refs.newUser.validate()) {
+                let formData = new FormData()
+                formData.append('name', this.newUser.name)
+                formData.append('email', this.newUser.email)
+                formData.append('password', this.newUser.password)
+                axios.post(newUser(), formData)
+                    .then(() => {
+                        this.resetFields()
+                        this.dialog = false
+                        this.snackbar.show = true
+                        this.snackbar.text = 'User saved succesfully.'
+                    })
+                    .catch(e => console.log(e))
+            }
         },
         resetFields() {
             this.newUser = {
