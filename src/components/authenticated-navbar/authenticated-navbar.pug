@@ -9,6 +9,10 @@ div
                 v-list-tile-action
                     v-icon people
                 v-list-tile-title Users
+            v-list-tile(@click="logout")
+                v-list-tile-action
+                    v-icon logout
+                v-list-tile-title Logout
             //- v-list-group(prepend-icon='account_circle')
             //-     v-list-tile(slot='activator')
             //-         v-list-tile-title Users

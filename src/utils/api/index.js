@@ -15,5 +15,9 @@ export const updateUser = id => {
 }
 
 export const deleteUser = id => {
-    return `api/users/${id}`
+    return `/api/users/${id}`
+}
+
+export const login = () => {
+    return `/oauth/token`
 }

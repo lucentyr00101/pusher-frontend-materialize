@@ -1,10 +1,16 @@
-// import axios from 'axios'
+import axios from 'axios'
+import { login } from '@/utils/api'
+import { clientID, clientSecret } from '@/utils/laravel-passport'
+
 export default {
     data() {
         return {
             user: {
-                email: '',
-                password: ''
+                username: 'admin@email.com',
+                password: 'secret',
+                client_id: clientID(),
+                client_secret: clientSecret(),
+                grant_type: 'password'
             },
             loading: false,
             notification: {
@@ -24,7 +30,7 @@ export default {
                 this.switchLoadingState()
 
                 let formData = new FormData()
-                formData.append('username', this.user.email)
+                formData.append('username', this.user.username)
                 formData.append('password', this.user.password)
                 formData.append('client_id', clientID())
                 formData.append('client_secret', clientSecret())
@@ -32,19 +38,19 @@ export default {
 
                 this.showAlert('info', 'Logging in...')
                 
-                // axios.post(login(), formData)
-                //     .then(res => {
-                //         this.switchLoadingState()
-                //         this.$auth.setToken(res.data.access_token, res.data.expires_in + Date.now())
-                //         this.showAlert('success', 'Successfully logged in. Redirecting to dashboard.')
-                //         setTimeout(() => {
-                //             this.$router.go('/dashboard')
-                //         },1800)
-                //     }).catch(err => {
-                //         this.switchLoadingState()
-                //         console.log(err)
-                //         this.showAlert('error', err)
-                //     })
+                axios.post(login(), formData)
+                    .then(res => {
+                        this.switchLoadingState()
+                        this.$auth.setToken(res.data.access_token, res.data.expires_in + Date.now())
+                        this.showAlert('success', 'Successfully logged in. Redirecting to dashboard.')
+                        setTimeout(() => {
+                            this.$router.go('/home')
+                        },1800)
+                    }).catch(err => {
+                        this.switchLoadingState()
+                        console.log(err)
+                        this.showAlert('error', err.response.data.message)
+                    })
             }
         },
         switchLoadingState() {

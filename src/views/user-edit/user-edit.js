@@ -4,7 +4,7 @@ import { showUser, updateUser } from '@/utils/api'
 export default {
     data() {
         return {
-            user: null,
+            user: '',
         }
     },
     mounted () {
