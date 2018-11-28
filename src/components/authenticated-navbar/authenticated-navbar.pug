@@ -5,10 +5,12 @@ div
                 v-list-tile-action
                     v-icon home
                 v-list-tile-title Home
+            v-divider
             v-list-tile(:to="{ name: 'users' }" @click="")
                 v-list-tile-action
                     v-icon people
                 v-list-tile-title Users
+            v-divider
             v-list-tile(@click="logout")
                 v-list-tile-action
                     v-icon logout
