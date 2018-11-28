@@ -1,0 +1,12 @@
+
+v-layout(row wrap)
+    v-flex(lg4 offset-lg4 md6 offset-md3 sm6 offset-sm3)
+        v-card.py-4.px-5(hover)
+            v-card-title
+                v-layout(row wrap)
+                    v-flex(lg12)
+                        v-alert(:value="notification.hasNotification" :type="notification.type") {{ notification.message }}
+                        v-form(@submit.prevent="submit" ref="loginForm" lazy-validation)
+                            v-text-field(label="Email" v-model="user.email" :rules="rules")
+                            v-text-field(label="Password" type="password" v-model="user.password" :rules="rules")
+                            v-btn(block color="primary" type="submit" :loading="loading") Login

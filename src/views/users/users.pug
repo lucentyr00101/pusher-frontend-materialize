@@ -22,7 +22,7 @@ div
                         v-spacer
                         v-btn(color="blue darken-1" flat @click="dialog = false") Cancel
                         v-btn(color="blue darken-1" flat type="submit") Save
-    v-data-table.elevation-1(:rows-per-page-items="rowsPerPageItems" :headers="headers" :items="users" v-if="users" disable-initial-sort)
+    v-data-table.elevation-1(:rows-per-page-items="rowsPerPageItems" :headers="headers" :items="users" disable-initial-sort v-if="users")
         template(slot="items" slot-scope="props")
             td.text-xs-center {{ props.item.id }}
             td.text-xs-center {{ props.item.name }}
@@ -34,6 +34,6 @@ div
                     v-icon(small) edit 
                 v-btn(color="red" icon @click="deleteUser(props.item.id)")
                     v-icon(small) delete
-    v-snackbar(v-model="snackbar.show" :color="snackbar.color" timeout="3000")
+    v-snackbar(v-model="snackbar.show" :color="snackbar.color" :timeout="3000")
         | {{ snackbar.text }}
         v-btn(dark flat @click="snackbar.show = false") Close

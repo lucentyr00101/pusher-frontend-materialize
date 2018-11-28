@@ -8,13 +8,27 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/login'),
+      meta : {
+        forVisitors: true
+      }
+    },
+    {
+      path: '/home',
       name: 'home',
-      component: () => import('@/base/home')
+      component: () => import('@/base/home'),
+      meta : {
+        forAuth: true
+      }
     },
     {
       path: '/users',
       component: () => import('@/base/users'),
+      meta: {
+        forAuth: true
+      },
       children: [
         {
           path: '/',

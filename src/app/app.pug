@@ -1,5 +1,6 @@
 v-app(dark)
-    navbar(app)
+    authenticatedNavbar(app v-if="this.$auth.isAuthenticated()")
+    notAuthenticatedToolbar(app v-else)
     v-content
         v-container(fluid)
             router-view

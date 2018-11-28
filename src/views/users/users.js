@@ -11,7 +11,7 @@ const pusher = new Pusher(process.env.VUE_APP_PUSHER_APP_KEY, {
 export default {
     data() {
         return {
-            users: null,
+            users: [],
             headers: [
                 { text: 'ID', value: "id", align: 'center' },
                 { text: 'Name', value: 'name', align: 'center' },
@@ -34,7 +34,7 @@ export default {
             },
             rules: [
                 v => !!v || 'Field is required',
-            ]
+            ],
         }
     },
     methods: {
